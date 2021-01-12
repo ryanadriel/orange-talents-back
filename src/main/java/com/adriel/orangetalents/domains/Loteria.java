@@ -1,45 +1,44 @@
 package com.adriel.orangetalents.domains;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PESSOA")
-public class Pessoa implements Serializable {
-
+@Table(name = "LOTERIA")
+public class Loteria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	//Atributos
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String email;
+	private String codigo;
 	
 	//Relacionamentos
-	@OneToMany(mappedBy = "pessoa")
-	private List<Loteria> loterias = new ArrayList<>();
-	
-	public Pessoa() {
-	
+	@ManyToOne
+	@JoinColumn(name = "pessoa_id")
+	private Pessoa pessoa;
+
+	public Loteria() {
+
 	}
 
 	//Construtores
-	public Pessoa(Integer id, String email) {
-
+	public Loteria(Integer id, String codigo,Pessoa pessoa) {
 		this.id = id;
-		this.email = email;
+		this.codigo = codigo;
+		this.pessoa = pessoa;
 	}
 
-	//Getter e Setters
+	//Getters e Setter
 	public Integer getId() {
 		return id;
 	}
@@ -48,20 +47,20 @@ public class Pessoa implements Serializable {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
-	public List<Loteria> getLoterias() {
-		return loterias;
+	public Pessoa getPessoa() {
+		return pessoa;
 	}
 
-	public void setLoterias(List<Loteria> loterias) {
-		this.loterias = loterias;
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	//HashCode e Equals
@@ -81,7 +80,7 @@ public class Pessoa implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pessoa other = (Pessoa) obj;
+		Loteria other = (Loteria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -89,6 +88,5 @@ public class Pessoa implements Serializable {
 			return false;
 		return true;
 	}
-	
 
 }
