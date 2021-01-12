@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "LOTERIA")
 public class Loteria implements Serializable {
@@ -23,6 +25,7 @@ public class Loteria implements Serializable {
 	private String codigo;
 	
 	//Relacionamentos
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
