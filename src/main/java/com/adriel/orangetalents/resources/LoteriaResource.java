@@ -3,6 +3,8 @@ package com.adriel.orangetalents.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,7 @@ public class LoteriaResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@RequestBody LoteriaDTO obj){
+	public ResponseEntity<Void> insert(@Valid @RequestBody LoteriaDTO obj){
 		Loteria loteria = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(loteria.getId()).toUri();
 		

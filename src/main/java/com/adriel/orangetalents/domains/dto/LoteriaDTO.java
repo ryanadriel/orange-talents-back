@@ -2,12 +2,17 @@ package com.adriel.orangetalents.domains.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
 public class LoteriaDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	//Atributos
 	private Integer id;
+	@Email(message = "email inválido")
+	@NotEmpty(message = "o campo email não pode ser vazio")
 	private String email;
 	private String codigo;
 	

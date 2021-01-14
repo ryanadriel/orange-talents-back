@@ -28,7 +28,10 @@ public class LoteriaService {
 	}
 	
 	public List<Loteria> findByEmail(String email){
-		return repo.findByEmail(email);
+		if(email != null) {
+			return repo.findByEmail(email);
+		}
+		return null;
 	}
 	
 	public Loteria insert(LoteriaDTO obj) {
